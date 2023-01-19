@@ -8,7 +8,7 @@ public class MainApplication {
 
 		Scanner sc = new Scanner(System.in);
 		Record record = new Record();
-		Challanger chger = new Challanger();
+		Challenger chger = new Challenger();
 
 		while(true) {
 			System.out.println("========= 메인 메뉴 ========= ");
