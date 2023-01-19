@@ -10,11 +10,11 @@ public class Challenger {
 	GlassBridge gBridge = new GlassBridge();
 
 	String challengername;
-	int sucessnum = 0;
+	int sucessnum;
+	
 
-	public void crossBridge(String name) {
-		challengername = name;
-		gBridge.makingRightWay();
+	public void crossBridge() {
+		sucessnum = 0;
 		while(true) {
 			System.out.println("============ 유리 다리 건너기 ==========");
 			System.out.println(challengername + "의 도전~~");
@@ -26,26 +26,27 @@ public class Challenger {
 			int no = sc.nextInt();
 
 			switch(no) {
-			case 1 : advanceRight();
+			case 1 :  advanceRight();
 				break;
 			case 2 : advanceLeft(); 
 				break;
 			case 3 :char yn = giveUP();
 			if(yn == 'y') {
 				System.out.println("포기하셨습니다");
-				System.out.println(sucessnum + "회 성공했습니다.");
-				record.newbest(sucessnum);
+				endGame();
 				return;
 			} else if(yn == 'n') {
 				break;
-			}else {
-				System.out.println(" y 아니면 n을 입력하세요");
 			}
 			default : System.out.println("정확한 숫자를 입력해주세요");		
 			break;
 			}
 		}
 
+	}
+	public void makingName() {
+		System.out.print ("도전자의 이름은?");
+		challengername = sc.next();
 	}
 
 	public char giveUP() {

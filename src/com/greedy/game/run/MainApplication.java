@@ -8,20 +8,22 @@ public class MainApplication {
 
 		Scanner sc = new Scanner(System.in);
 		Record record = new Record();
-		Challenger chger = new Challenger();
+		Challenger chg = new Challenger();
+		GlassBridge gBridge = new GlassBridge();
+		
+		gBridge.makingRightWay();
 
 		while(true) {
 			System.out.println("========= 메인 메뉴 ========= ");
 			record.nowBest();
 			System.out.println("1. 도전");
 			System.out.println("2. 종료");
-			System.out.println("메뉴화면 선택 : ");
+			System.out.print("메뉴화면 선택 : ");
 			int no  = sc.nextInt();
 
 			switch(no) {
-			case 1 : System.out.print ("도전자의 이름은?");
-			String name = sc.next();
-			chger.crossBridge(name);
+			case 1 : chg.makingName();
+				chg.crossBridge();
 			break;
 			case 2 : System.out.println("게임을 종료합니다."); 
 			return;
