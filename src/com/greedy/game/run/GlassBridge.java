@@ -2,49 +2,55 @@ package com.greedy.game.run;
 
 public class GlassBridge {
 	
-	Challenger chg = new Challenger();
+	Record record = new Record();
 
-	int count = 0;
-	int[] rightWay = new int[18];
-
-
+	static int sucessnum = 0;
+	static int[] rightWay = new int[18];
+	
 	public void makingRightWay() {
-
 		for (int i = 0; i < rightWay.length; i++) {
-			rightWay[i] = (int) (Math.random()*2) + 1;
+			rightWay[i] = (int) (Math.random()*2 + 1);
 		}
-
 	}
+	
+	public void thisWayIsRight(int jump) {
 
-
-	public int thisWayIsRight(int i) {
-
-		if(rightWay[count] == i) {
+		if(rightWay[sucessnum] == jump) {
 			System.out.println(".........................");
 			System.out.println(".........................");
 			System.out.println(".........................");
 			System.out.println(".......성공!");
-			return crossSucess();
+			crossSucess();
+			return;
 
 		} else {
 			System.out.println(".........................");
 			System.out.println(".........................");
 			System.out.println(".........................");
 			System.out.println(".......깽그랑!!");
-			return crossFail();
+			crossFail();
+			return;
 		}
 
 	}
 
 	public int crossSucess() {
-		count++;
+		sucessnum++;
 		return 1;
 	}
 
 	public int crossFail() {
-		count = 0;
-		System.out.println("당신은 죽었습니다.");
-		
+		sucessnum = 0;
+		System.out.println("유리가 깨져 추락했습니다.");
+		record.endGame(sucessnum);
 		return 0;
+	}
+
+	public void checkAnswer() {
+		for (int i = 0; i < rightWay.length; i++) {
+		System.out.print(rightWay[i]);
+		}
+		System.out.println();
+		
 	} 
 }

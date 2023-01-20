@@ -10,12 +10,10 @@ public class MainApplication {
 		Record record = new Record();
 		Challenger chg = new Challenger();
 		GlassBridge gBridge = new GlassBridge();
-		
-		gBridge.makingRightWay();
+
 
 		while(true) {
 			System.out.println("========= 메인 메뉴 ========= ");
-			record.nowBest();
 			System.out.println("1. 도전");
 			System.out.println("2. 종료");
 			System.out.print("메뉴화면 선택 : ");
@@ -23,7 +21,8 @@ public class MainApplication {
 
 			switch(no) {
 			case 1 : chg.makingName();
-				chg.crossBridge();
+			gBridge.makingRightWay();
+			chg.crossBridge();
 			break;
 			case 2 : System.out.println("게임을 종료합니다."); 
 			return;

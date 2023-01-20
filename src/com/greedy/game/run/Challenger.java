@@ -11,14 +11,14 @@ public class Challenger {
 
 	String challengername;
 	int sucessnum;
-	
+
 
 	public void crossBridge() {
 		sucessnum = 0;
 		while(true) {
 			System.out.println("============ 유리 다리 건너기 ==========");
 			System.out.println(challengername + "의 도전~~");
-			System.out.println(sucessnum + "회 성공");
+			System.out.println(sucessnum + "번째 다리");
 			System.out.println("1.왼쪽으로 간다!");
 			System.out.println("2.오른쪽으로 간다!");
 			System.out.println("3.포기하자");
@@ -26,18 +26,21 @@ public class Challenger {
 			int no = sc.nextInt();
 
 			switch(no) {
-			case 1 :  advanceRight();
-				break;
-			case 2 : advanceLeft(); 
-				break;
+			case 1 :  advanceLeft();
+			break;
+			case 2 : advanceRight(); 
+			break;
 			case 3 :char yn = giveUP();
 			if(yn == 'y') {
-				System.out.println("포기하셨습니다");
-				endGame();
+				System.out.println("유리 다리 건너기를 포기했습니다");
+				record.endGame(sucessnum);
 				return;
 			} else if(yn == 'n') {
 				break;
 			}
+			case 9 : System.out.println("정답확인");
+			gBridge.checkAnswer();
+			break;
 			default : System.out.println("정확한 숫자를 입력해주세요");		
 			break;
 			}
@@ -54,15 +57,16 @@ public class Challenger {
 		char yn = sc.next().charAt(0);
 		return yn;
 	}
-	
-	public void advanceRight() {
-		System.out.println("오른쪽으로 간다!");
+
+	public void advanceLeft() {
+		System.out.println("왼쪽으로 간다!");
 		gbridge.thisWayIsRight(1);
 	}
 	
-	public void advanceLeft() {
-		System.out.println("왼쪽으로 간다!");
+	public void advanceRight() {
+		System.out.println("오른쪽으로 간다!");
 		gbridge.thisWayIsRight(2);
 	}
+
 
 }
