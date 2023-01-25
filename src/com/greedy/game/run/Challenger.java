@@ -3,39 +3,53 @@ package com.greedy.game.run;
 import java.util.Scanner;
 
 public class Challenger {
-
 	Scanner sc = new Scanner(System.in);
 	GlassBridge gbridge = new GlassBridge();
-	Record record = new Record();
 	GlassBridge gBridge = new GlassBridge();
+
 
 	String challengername;
 	int sucessnum;
+	int sucess;
 
 
 	public void crossBridge() {
 		sucessnum = 0;
 		while(true) {
 			System.out.println("============ 유리 다리 건너기 ==========");
-			System.out.println(challengername + "의 도전~~");
-			System.out.println(sucessnum + "번째 다리");
+			System.out.println(challengername + "의 도전");
+			System.out.println("성공 횟수 : " + sucessnum + "개");
 			System.out.println("1.왼쪽으로 간다!");
 			System.out.println("2.오른쪽으로 간다!");
-			System.out.println("3.포기하자");
-			System.out.print("메뉴 선택 : ");
+			System.out.println("3.포기한다");
+			System.out.print("행동 선택 : ");
 			int no = sc.nextInt();
 
 			switch(no) {
-			case 1 :  advanceLeft();
-			break;
-			case 2 : advanceRight(); 
-			break;
-			case 3 :char yn = giveUP();
-			if(yn == 'y') {
-				System.out.println("유리 다리 건너기를 포기했습니다");
-				record.endGame(sucessnum);
+			case 1 :  sucess = advanceLeft();
+			sucessnum += sucess;
+			if (sucess == 0) {
 				return;
-			} else if(yn == 'n') {
+			} else if (sucessnum == 18) {
+				System.out.println("축하합니다!!" + challengername +"은/는 다리를 건너는데 성공했습니다!!");
+				return;
+			}
+			break;
+			case 2 :  sucess = advanceRight(); 
+			sucessnum += sucess;
+			if (sucess == 0) {
+				return;
+			}else if (sucessnum == 18) {
+				System.out.println("축하합니다!!" + challengername +"은/는 다리를 건너는데 성공했습니다!!");
+				return;
+			}
+			break;
+			case 3 :int yn = giveUP();
+			if(yn == 1) {
+				System.out.println("유리 다리 건너기를 포기했습니다");
+				System.out.println(sucessnum + "회 성공했습니다.");;
+				return;
+			} else if(yn == 2) {
 				break;
 			}
 			case 9 : System.out.println("정답확인");
@@ -52,20 +66,24 @@ public class Challenger {
 		challengername = sc.next();
 	}
 
-	public char giveUP() {
-		System.out.print("정말로 포기하겠습니까? (y/n)");
-		char yn = sc.next().charAt(0);
-		return yn;
+	public int giveUP() {
+		System.out.print("정말로 포기하겠습니까? (1 포기한다/2 아니다)");
+		int yn = sc.nextInt();
+		if(yn != 1 && yn != 2) {
+			System.out.println(" 정확한 숫자를 입력해주세요 ");
+			yn = sc.nextInt();
+		}
+		return  yn;
 	}
 
-	public void advanceLeft() {
+	public int advanceLeft() {
 		System.out.println("왼쪽으로 간다!");
-		gbridge.thisWayIsRight(1);
+		return gbridge.thisWayIsRight(1);
 	}
 	
-	public void advanceRight() {
+	public int advanceRight() {
 		System.out.println("오른쪽으로 간다!");
-		gbridge.thisWayIsRight(2);
+		return gbridge.thisWayIsRight(2);
 	}
 
 
